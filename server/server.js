@@ -4,8 +4,22 @@ const app = express()
 const port = process.env.PORT || 5000
 const dbConnection = require('./db')
 app.use(express.json())
-var cors = require("cors");
-app.use(cors());
+
+const cors = require("cors");
+const corsOpts = {
+    origin: '*',
+  
+    methods: [
+      'GET',
+      'POST',
+    ],
+  
+    allowedHeaders: [
+      'Content-Type',
+    ],
+  };
+  
+app.use(cors(corsOpts));
 
 app.use('/api/cars/' , require('./routes/carsRoute'))
 app.use('/api/users/' , require('./routes/usersRoute'))
